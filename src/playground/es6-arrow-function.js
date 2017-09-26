@@ -1,5 +1,3 @@
-'use strict';
-
 // const sq = function (x) {
 //   return x * x;
 // };
@@ -30,9 +28,9 @@
 //   return a + b;
 // }
 
-var add = function add(a, b) {
+const add = (a, b) => {
   return a + b;
-};
+}
 
 // console.log(add(55, 2, 23434));
 
@@ -53,15 +51,11 @@ var add = function add(a, b) {
 // }
 // user.print();
 
-var user = {
+const user = {
   name: 'Paw',
   cities: ['Berlin', 'Dublin', 'Londek'],
-  print: function print() {
-    var _this = this;
-
-    return this.cities.map(function (city) {
-      return _this.name + ' city ' + city;
-    });
+  print() {
+    return this.cities.map((city) => this.name + ' city ' + city);
   }
-};
+}
 console.log(user.print());
