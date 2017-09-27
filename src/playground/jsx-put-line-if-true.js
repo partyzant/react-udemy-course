@@ -9,7 +9,7 @@ const app = {
 const template = (
   <div>
     <h1>{app.title}</h1>
-    {app.subtit && <p>{app.subtit}</p>/*jeśli app.subtit jest true, zwraca to co za &&, jeśli nie zwraca false i linia się nie wyświetla*/}
+    {app.subtit && <p>{app.subtit}</p>/*jeśli app.subtit jest true, zwraca to co za &&, jeśli nie, zwraca false i linia się nie wyświetla*/}
     <p>{app.options.length > 0 ? 'here opt' : 'no opt'}</p>
     <ol>
       <li>one</li>

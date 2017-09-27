@@ -24,7 +24,7 @@
 
 
 // const add = function (a, b) {
-//   console.log(arguments); //wszystkie argumenty przekazane do funkcji
+//   console.log(arguments); //wszystkie argumenty przekazane do funkcji, w arrow function nie ma dostępu do wszystkich argumentów
 //   return a + b;
 // }
 
@@ -51,11 +51,21 @@ const add = (a, b) => {
 // }
 // user.print();
 
-const user = {
-  name: 'Paw',
-  cities: ['Berlin', 'Dublin', 'Londek'],
-  print() {
-    return this.cities.map((city) => this.name + ' city ' + city);
+// const user = {
+//   name: 'Paw',
+//   cities: ['Berlin', 'Dublin', 'Londek'],
+//   print() {
+//     return this.cities.map((city) => this.name + ' city ' + city);
+//   }
+// }
+
+
+const multiplyer = {
+  numbers: [2, 4, 8],
+  xBy: 3,
+  multiply() {
+    return this.numbers.map((x) => this.xBy * x);
   }
 }
-console.log(user.print());
+
+console.log(multiplyer.multiply());

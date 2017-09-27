@@ -1,67 +1,86 @@
 'use strict';
 
-// const sq = function (x) {
-//   return x * x;
-// };
+console.log('app i runing');
 
-// // const sqArrow = (x) => {
-// //   return x * x;
-// // }
-
-// const sqArrow = (x) => x * x;
-
-
-// console.log(sqArrow(4));
-
-
-// const n = 'Juka Buka';
-
-// const gfn = (x) => {
-//   return x.split(' ')[0];
-// }
-// console.log(gfn(n));
-
-// const gfn2 = (x) => x.split(' ')[1];
-// console.log(gfn2(n));
-
-
-// const add = function (a, b) {
-//   console.log(arguments); //wszystkie argumenty przekazane do funkcji
-//   return a + b;
-// }
-
-var add = function add(a, b) {
-  return a + b;
+var app = {
+  title: 'Idecision App',
+  subtit: 'wielki cyc',
+  options: ['One', 'Two']
 };
 
-// console.log(add(55, 2, 23434));
-
-// const user = {
-//   name: 'Paw',
-//   cities: ['Berlin', 'Dublin'],
-//   print: function () {
-//     //console.log(this.name);
-//     const that = this;
-
-//     // this.cities.forEach(function (city) { //this nie dostępne w tej funkcji
-//     //   console.log(that.name + 'city ' + city)
-//     // });
-//     this.cities.forEach((city) => { //this dostępne w arrow function
-//       console.log(this.name + ' city ' + city)
-//     });
-//   }
-// }
-// user.print();
+var template = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    app.title
+  ),
+  app.subtit && React.createElement(
+    'p',
+    null,
+    app.subtit
+  ) /*jeśli app.subtit jest true, zwraca to co za &&, jeśli nie zwraca false i linia się nie wyświetla*/,
+  React.createElement(
+    'p',
+    null,
+    app.options.length > 0 ? 'here opt' : 'no opt'
+  ),
+  React.createElement(
+    'ol',
+    null,
+    React.createElement(
+      'li',
+      null,
+      'one'
+    ),
+    React.createElement(
+      'li',
+      null,
+      'two'
+    ),
+    React.createElement(
+      'li',
+      null,
+      'thre'
+    )
+  )
+);
 
 var user = {
-  name: 'Paw',
-  cities: ['Berlin', 'Dublin', 'Londek'],
-  print: function print() {
-    var _this = this;
-
-    return this.cities.map(function (city) {
-      return _this.name + ' city ' + city;
-    });
-  }
+  name: 'Jula',
+  age: 26,
+  location: 'Crush'
 };
-console.log(user.print());
+
+function getLocation(location) {
+  if (location) {
+    return React.createElement(
+      'p',
+      null,
+      'Loc: ',
+      location
+    );
+  }
+}
+
+var templateTwo = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    user.name ? user.name : 'Jon Doe'
+  ),
+  user.age && user.age >= 18 && React.createElement(
+    'p',
+    null,
+    'Age: ',
+    user.age
+  ),
+  getLocation(user.location)
+);
+
+var appRoot = document.getElementById("app");
+
+ReactDOM.render(template, appRoot);
