@@ -1,44 +1,90 @@
-console.log('app i runing');
+class IndecisionApp extends React.Component{
+  render(){
+    const title = 'Indecision';
+    const subtitle = 'Czy juka czasem na p kuka';
+    const options = ['one', 'two', 'three'];
 
-const app = {
-  title: 'Idecision App',
-  subtit: 'wielki cyc',
-  options: ['One', 'Two']
-}
-
-const template = (
-  <div>
-    <h1>{app.title}</h1>
-    {app.subtit && <p>{app.subtit}</p>/*jeśli app.subtit jest true, zwraca to co za &&, jeśli nie zwraca false i linia się nie wyświetla*/}
-    <p>{app.options.length > 0 ? 'here opt' : 'no opt'}</p>
-    <ol>
-      <li>one</li>
-      <li>two</li>
-      <li>thre</li>
-    </ol>
-  </div>
-);
-
-const user = {
-  name: 'Jula',
-  age: 26,
-  location: 'Crush'
-}
-
-function getLocation(location) {
-  if (location) {
-    return <p>Loc: {location}</p>
+    return(
+      <div>
+        <Header title={title} subtitle={subtitle}/>
+        <Action />
+        <Options options={options}/>
+        <AddOption />
+      </div>
+    );
   }
 }
 
-const templateTwo = (
-  <div>
-    <h1>{user.name ? user.name : 'Jon Doe'}</h1>
-    {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-    {getLocation(user.location)}
-  </div>
-);
+class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>{this.props.title}</h1>
+        <h2>{this.props.subtitle}</h2>
+      </div>
+    );
+    }
+}
 
-const appRoot = document.getElementById("app");
+class Action extends React.Component {
+  handlePick(){
+    alert('sdfsd');
+  }
 
-ReactDOM.render(template, appRoot);
+  render() {
+    return (
+      <div>
+        <button onClick={this.handlePick}>What should I do? </button>
+      </div>
+    );
+  }
+}
+
+class Options extends React.Component {
+  handleRemoveAll(){
+    alert('sdfsdaaaaa');
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleRemoveAll}>Remove All</button>
+        {
+          this.props.options.map((option, i) => <Option key={i} option={option}/>)
+        }
+      </div>
+    );
+  }
+}
+
+class Option extends React.Component{
+  render(){
+    return(
+      <div>
+        {this.props.option}
+      </div>
+    );
+  }
+}
+
+class AddOption extends React.Component {
+  handleAddOption(e){
+    e.preventDefault();
+    const option = e.target.elements.option.value.trim();
+    if(option) alert(option);
+  }
+
+  render() {
+    return (
+      <div>
+        <form action="" onSubmit={this.handleAddOption}>
+          <input type="text" name="option"/>
+          <button>Add Option</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
