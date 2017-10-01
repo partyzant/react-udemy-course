@@ -41,10 +41,13 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
-  handleRemoveAll(){
-    alert('sdfsdaaaaa');
+  constructor(props){
+    super(props);
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
   }
-
+  handleRemoveAll(){
+    console.log(this.props);
+  }
   render() {
     return (
       <div>
