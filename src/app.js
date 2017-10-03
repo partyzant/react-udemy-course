@@ -4,8 +4,9 @@ class IndecisionApp extends React.Component{
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
+    this.testFunc = this.testFunc.bind(this);
     this.state = {
-      options: []
+      options: ['op 1']
     };
   }
   handleDeleteOptions(){
@@ -18,6 +19,7 @@ class IndecisionApp extends React.Component{
   handlePick(){
     const randIndex = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randIndex];
+    alert(option);
   }
   handleAddOption(option){
     if(!option) {
@@ -29,6 +31,14 @@ class IndecisionApp extends React.Component{
     this.setState((prevState) => {
       return {
         options: prevState.options.concat(option)
+      };
+    });
+  }
+  testFunc(x){
+    this.setState((prevState) => {
+      let tmp = prevState.options;
+      return {
+        options: tmp.filter((_, i) => i !== x)
       };
     });
   }
@@ -46,6 +56,7 @@ class IndecisionApp extends React.Component{
         <Options
           options={this.state.options}
           handleDeleteOptions={this.handleDeleteOptions}
+          testFunc={this.testFunc}
         />
         <AddOption handleAddOption={this.handleAddOption}/>
       </div>
@@ -53,54 +64,46 @@ class IndecisionApp extends React.Component{
   }
 }
 
-class Header extends React.Component {
-  render() {
+const Header = (props) => {
     return (
       <div>
-        <h1>{this.props.title}</h1>
-        <h2>{this.props.subtitle}</h2>
+        <h1>{props.title}</h1>
+        <h2>{props.subtitle}</h2>
       </div>
     );
-    }
-}
+};
 
-class Action extends React.Component {
-  render() {
+const Action = (props) => {
     return (
       <div>
         <button
-          onClick={this.props.handlePick}
-          disabled={!this.props.hasOptions}
+          onClick={props.handlePick}
+          disabled={!props.hasOptions}
           >
             What should I do?
           </button>
       </div>
     );
-  }
-}
+};
 
-class Options extends React.Component {
-  render() {
+const Options = (props) => {
     return (
       <div>
-        <button onClick={this.props.handleDeleteOptions}>Remove All</button>
+        <button onClick={props.handleDeleteOptions}>Remove All</button>
         {
-          this.props.options.map((option, i) => <Option key={i} option={option}/>)
+          props.options.map((option, i) => <Option key={i} option={option} testFunc={props.testFunc} id={i}/>)
         }
       </div>
     );
-  }
-}
+};
 
-class Option extends React.Component{
-  render(){
+const Option = (props) => {
     return(
-      <div>
-        {this.props.option}
+      <div onClick={props.testFunc.bind(this, props.id)}>
+        {props.option}
       </div>
     );
-  }
-}
+};
 
 class AddOption extends React.Component {
   constructor(props){
@@ -136,6 +139,5 @@ class AddOption extends React.Component {
     );
   }
 }
-
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
