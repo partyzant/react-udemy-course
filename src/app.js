@@ -5,7 +5,7 @@ class IndecisionApp extends React.Component{
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
     this.state = {
-      options: ['one', 'two', 'three']
+      options: []
     };
   }
   handleDeleteOptions(){
@@ -20,6 +20,12 @@ class IndecisionApp extends React.Component{
     const option = this.state.options[randIndex];
   }
   handleAddOption(option){
+    if(!option) {
+      return 'Enter valid option';
+    } else if (this.state.options.indexOf(option) > -1) {
+      return 'This option exists';
+    }
+
     this.setState((prevState) => {
       return {
         options: prevState.options.concat(option)
@@ -97,16 +103,31 @@ class Option extends React.Component{
 }
 
 class AddOption extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      error: false
+    };
+  }
   handleAddOption(e){
     e.preventDefault();
     const option = e.target.elements.option.value.trim();
-    if(option) this.props.handleAddOption(option);
+    const error = this.props.handleAddOption(option);
     e.target.elements.option.value = '';
+
+    // if(error){
+      this.setState(() => {
+        return {
+          error //to samo co 'error: error' taki skrót można stosować w ES6 gdy nazwa właściwości jest taka sama jak przypisywanej zmiennej
+        };
+      });
+    // }
   }
 
   render() {
     return (
       <div>
+        {this.state.error && <p style={{color:'red'}}>{this.state.error}</p>}
         <form action="" onSubmit={this.handleAddOption.bind(this)}>
           <input type="text" name="option"/>
           <button>Add Option</button>

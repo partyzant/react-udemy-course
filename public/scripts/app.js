@@ -20,7 +20,7 @@ var IndecisionApp = function (_React$Component) {
     _this.handlePick = _this.handlePick.bind(_this);
     _this.handleAddOption = _this.handleAddOption.bind(_this);
     _this.state = {
-      options: ['one', 'two', 'three']
+      options: []
     };
     return _this;
   }
@@ -43,6 +43,12 @@ var IndecisionApp = function (_React$Component) {
   }, {
     key: 'handleAddOption',
     value: function handleAddOption(option) {
+      if (!option) {
+        return 'Enter valid option';
+      } else if (this.state.options.indexOf(option) > -1) {
+        return 'This option exists';
+      }
+
       this.setState(function (prevState) {
         return {
           options: prevState.options.concat(option)
@@ -193,10 +199,15 @@ var Option = function (_React$Component5) {
 var AddOption = function (_React$Component6) {
   _inherits(AddOption, _React$Component6);
 
-  function AddOption() {
+  function AddOption(props) {
     _classCallCheck(this, AddOption);
 
-    return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+    var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+
+    _this6.state = {
+      error: false
+    };
+    return _this6;
   }
 
   _createClass(AddOption, [{
@@ -204,8 +215,16 @@ var AddOption = function (_React$Component6) {
     value: function handleAddOption(e) {
       e.preventDefault();
       var option = e.target.elements.option.value.trim();
-      if (option) this.props.handleAddOption(option);
+      var error = this.props.handleAddOption(option);
       e.target.elements.option.value = '';
+
+      // if(error){
+      this.setState(function () {
+        return {
+          error: error //to samo co 'error: error' taki skrót można stosować w ES6 gdy nazwa właściwości jest taka sama jak przypisywanej zmiennej
+        };
+      });
+      // }
     }
   }, {
     key: 'render',
@@ -213,6 +232,11 @@ var AddOption = function (_React$Component6) {
       return React.createElement(
         'div',
         null,
+        this.state.error && React.createElement(
+          'p',
+          { style: { color: 'red' } },
+          this.state.error
+        ),
         React.createElement(
           'form',
           { action: '', onSubmit: this.handleAddOption.bind(this) },
