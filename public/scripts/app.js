@@ -19,9 +19,9 @@ var IndecisionApp = function (_React$Component) {
     _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
     _this.handlePick = _this.handlePick.bind(_this);
     _this.handleAddOption = _this.handleAddOption.bind(_this);
-    _this.testFunc = _this.testFunc.bind(_this);
+    _this.deleteSingleOption = _this.deleteSingleOption.bind(_this);
     _this.state = {
-      options: ['op 1']
+      options: props.options
     };
     return _this;
   }
@@ -30,9 +30,7 @@ var IndecisionApp = function (_React$Component) {
     key: 'handleDeleteOptions',
     value: function handleDeleteOptions() {
       this.setState(function () {
-        return {
-          options: []
-        };
+        return { options: [] };
       });
     }
   }, {
@@ -52,14 +50,12 @@ var IndecisionApp = function (_React$Component) {
       }
 
       this.setState(function (prevState) {
-        return {
-          options: prevState.options.concat(option)
-        };
+        return { options: prevState.options.concat(option) };
       });
     }
   }, {
-    key: 'testFunc',
-    value: function testFunc(x) {
+    key: 'deleteSingleOption',
+    value: function deleteSingleOption(x) {
       this.setState(function (prevState) {
         var tmp = prevState.options;
         return {
@@ -73,7 +69,7 @@ var IndecisionApp = function (_React$Component) {
     key: 'render',
     value: function render() {
       var title = 'Indecision';
-      var subtitle = 'Jakiś kurwa subtytuł zjebany';
+      var subtitle = 'zainstalować na chromie "react dev tools"';
 
       return React.createElement(
         'div',
@@ -86,7 +82,7 @@ var IndecisionApp = function (_React$Component) {
         React.createElement(Options, {
           options: this.state.options,
           handleDeleteOptions: this.handleDeleteOptions,
-          testFunc: this.testFunc
+          deleteSingleOption: this.deleteSingleOption
         }),
         React.createElement(AddOption, { handleAddOption: this.handleAddOption })
       );
@@ -95,6 +91,10 @@ var IndecisionApp = function (_React$Component) {
 
   return IndecisionApp;
 }(React.Component);
+
+IndecisionApp.defaultProps = {
+  options: []
+};
 
 var Header = function Header(props) {
   return React.createElement(
@@ -105,12 +105,16 @@ var Header = function Header(props) {
       null,
       props.title
     ),
-    React.createElement(
+    props.subtitle && React.createElement(
       'h2',
       null,
       props.subtitle
     )
   );
+};
+
+Header.defaultProps = {
+  title: 'default title'
 };
 
 var Action = function Action(props) {
@@ -138,7 +142,12 @@ var Options = function Options(props) {
       'Remove All'
     ),
     props.options.map(function (option, i) {
-      return React.createElement(Option, { key: i, option: option, testFunc: props.testFunc, id: i });
+      return React.createElement(Option, {
+        key: i,
+        option: option,
+        deleteSingleOption: props.deleteSingleOption,
+        id: i
+      });
     })
   );
 };
@@ -146,8 +155,13 @@ var Options = function Options(props) {
 var Option = function Option(props) {
   return React.createElement(
     'div',
-    { onClick: props.testFunc.bind(undefined, props.id) },
-    props.option
+    null,
+    props.option,
+    React.createElement(
+      'button',
+      { onClick: props.deleteSingleOption.bind(undefined, props.id) },
+      'Usu\u0144'
+    )
   );
 };
 
