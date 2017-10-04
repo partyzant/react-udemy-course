@@ -9,6 +9,27 @@ class IndecisionApp extends React.Component {
       options: props.options
     };
   }
+  componentDidMount(){
+    try{
+      const json = localStorage.getItem('options');
+      const options = JSON.parse(json);
+
+      if(options)
+      this.setState(() => ({ options }));//same as { options: options }
+    } catch (e) {
+      //Do nothing
+    }
+  }
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.options.length !== this.state.options.length){
+      const json = JSON.stringify(this.state.options);
+
+      localStorage.setItem('options', json);
+    }
+  }
+  componentWillUnmount(){
+    console.log('comp will unmount ');
+  }
   handleDeleteOptions() {
     this.setState(() => ({ options: [] }));
   }
@@ -27,12 +48,9 @@ class IndecisionApp extends React.Component {
     this.setState((prevState) => ({ options: prevState.options.concat(option) }));
   }
   deleteSingleOption(x) {
-    this.setState((prevState) => {
-      let tmp = prevState.options;
-      return {
-        options: tmp.filter((_, i) => i !== x)
-      };
-    });
+    this.setState((prevState) => ({
+      options: prevState.options.filter((_, i) => i !== x)
+    }));
   }
   render() {
     const title = 'Indecision';
@@ -90,6 +108,7 @@ const Options = (props) => {
   return (
     <div>
       <button onClick={props.handleDeleteOptions}>Remove All</button>
+      {props.options.length === 0 && <p>Add some options</p>}
       {
         props.options.map((option, i) => (
           <Option
@@ -124,15 +143,15 @@ class AddOption extends React.Component {
     e.preventDefault();
     const option = e.target.elements.option.value.trim();
     const error = this.props.handleAddOption(option);
-    e.target.elements.option.value = '';
 
-    // if(error){
+    if(!error)
+      e.target.elements.option.value = '';
+
     this.setState(() => {
       return {
         error //to samo co 'error: error' taki skrót można stosować w ES6 gdy nazwa właściwości jest taka sama jak przypisywanej zmiennej
       };
     });
-    // }
   }
 
   render() {
