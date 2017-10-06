@@ -65,9 +65,45 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-console.log('app is running')
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(1);
+
+
+
+console.log('app is running!');
+console.log(__WEBPACK_IMPORTED_MODULE_0__utils__["c" /* square */](4));
+console.log(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* add */](4, 2));
+console.log(__WEBPACK_IMPORTED_MODULE_0__utils__["b" /* default */](100, 70));
+
+// import { isAdult, canDrink } from './person';
+
+// console.log('app is running -person');
+// console.log(isAdult(21));
+// console.log(canDrink(21));
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+console.log('utils is runnig');
+
+const square = (x) => x * x;
+/* harmony export (immutable) */ __webpack_exports__["c"] = square;
+
+
+const add = (a, b) => a + b;
+/* harmony export (immutable) */ __webpack_exports__["a"] = add;
+
+
+//const substr = (a, b) => a - b;
+/* harmony default export */ __webpack_exports__["b"] = ((a, b) => a - b);
+
+// export { square, add, substr as default };
 
 
 /***/ })
