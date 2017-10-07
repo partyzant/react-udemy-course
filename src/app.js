@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import IndecisionApp from './components/IndecisionApp';
 
-const tem = <p>tesfdsft</p>;
-
-ReactDOM.render(tem, document.getElementById('app'));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
