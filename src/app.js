@@ -1,13 +1,6 @@
-import './utils';
-import anythingIwant, { square, add } from './utils';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-console.log('app is running!');
-console.log(square(4));
-console.log(add(4, 2));
-console.log(anythingIwant(100, 70));
+const tem = <p>tesfdsft</p>;
 
-// import { isAdult, canDrink } from './person';
-
-// console.log('app is running -person');
-// console.log(isAdult(21));
-// console.log(canDrink(21));
+ReactDOM.render(tem, document.getElementById('app'));
