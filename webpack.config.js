@@ -11,6 +11,24 @@ module.exports = {
       loader: 'babel-loader',
       test: /\.js$/,
       exclude: /node_modules/
+    },
+    {
+      test: /\.css$/,
+      exclude: /node_modules/,
+      use: [
+        {
+          loader: 'style-loader',
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+          }
+        },
+        {
+          loader: 'postcss-loader'
+        }
+      ]
     }]
   },
   devtool: 'cheap-module-eval-source-map',
