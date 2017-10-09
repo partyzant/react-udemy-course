@@ -14,7 +14,7 @@ module.exports = {
     },
     {
       test: /\.css$/,
-      exclude: /node_modules/,
+      exclude: /node_modules\/(?!(normalize\.css)\/).*/,
       use: [
         {
           loader: 'style-loader',
