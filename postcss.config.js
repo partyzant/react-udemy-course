@@ -1,7 +1,7 @@
 module.exports = {
   plugins: {
     'precss': {},
-    'autoprefixer': {},
+    'autoprefixer': { browserslist: 'last 10 versions' },
     'postcss-assets': { loadPaths: ['src/images/'] }
   }
 }
