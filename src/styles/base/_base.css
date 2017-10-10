@@ -1,8 +1,19 @@
-html{font-size: 62.5%}
-
-body{
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1.6rem;
+html {
+    font-size: 62.5%;
 }
 
-button{box-shadow: 5px 1px 0px 1px #f04e29;}
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $m-size;
+    background-color: $dark-blue;
+}
+
+
+/*button { /*test do autoprefixer
+    background: linear-gradient(to bottom, white, black);
+    border-radius: 2px;
+}
+
+.teest {
+    font-size: responsive;
+}*/

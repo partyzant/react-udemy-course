@@ -1,7 +1,8 @@
 module.exports = {
   plugins: {
     'precss': {},
-    'autoprefixer': { browserslist: 'last 10 versions' },
+    'rucksack-css': {},
+    'autoprefixer': { 'browserslist': ['last 15 versions'] },
     'postcss-assets': { loadPaths: ['src/images/'] }
   }
 }
