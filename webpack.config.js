@@ -23,10 +23,12 @@ module.exports = {
           loader: 'css-loader',
           options: {
             importLoaders: 1,
+            sourceMap: true
           }
         },
         {
-          loader: 'postcss-loader'
+          loader: 'postcss-loader',
+          options: { sourceMap: true }
         }
       ]
     }]
