@@ -8,6 +8,13 @@ body {
     background-color: $dark-blue;
 }
 
+button {
+    cursor: pointer;
+    &:disabled {
+        cursor: default
+    }
+}
+
 
 /*button { /*test do autoprefixer
     background: linear-gradient(to bottom, white, black);

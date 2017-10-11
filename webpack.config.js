@@ -13,7 +13,7 @@ module.exports = {
       exclude: /node_modules/
     },
     {
-      test: /\.css$/,
+      test: /\.s?css$/,
       exclude: /node_modules\/(?!(normalize\.css)\/).*/,
       use: [
         {
@@ -28,6 +28,10 @@ module.exports = {
         },
         {
           loader: 'postcss-loader',
+          options: { sourceMap: true }
+        },
+        {
+          loader: "sass-loader",
           options: { sourceMap: true }
         }
       ]
