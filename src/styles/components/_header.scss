@@ -2,7 +2,7 @@
     background: $off-black;
     /*background-image: inline('img.jpg');*/
     color: white;
-    margin-bottom: $xl-size;
+    margin-bottom: $m-size; 
     padding: $m-size 0;
     border-radius: 3px;
 }
@@ -18,3 +18,8 @@
     font-weight: 500;
     margin: 0;
 }
+
+
+@media (min-width: $desktop-break){
+    .header {margin-bottom: $xl-size; }
+}    
